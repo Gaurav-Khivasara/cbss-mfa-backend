@@ -12,13 +12,15 @@ const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, proces
 const User = sequelize.define("User", {
     name: { type: DataTypes.STRING, allowNull: false, unique: true },
     email: { type: DataTypes.STRING, allowNull: false, unique: true },
-    password: { type: DataTypes.STRING, allowNull:false },
-    isMfaActive: { type: DataTypes.BOOLEAN, allowNull: true},
+    password: { type: DataTypes.STRING, allowNull: false },
+    isMfaActive: { type: DataTypes.BOOLEAN, allowNull: true },
     twoFactorSecret: { type: DataTypes.STRING },
+    isVerified: { type: DataTypes.BOOLEAN, defaultValue: false },
+    verificationCode: { type: DataTypes.STRING }
 })
 
-sequelize.sync({ force: true })
-    .then(()=> console.log("😎 User table created in PostgreSQL"))
+sequelize.sync({ alter: true })
+    .then(() => console.log("😎 User table created in PostgreSQL"))
     .catch(err => console.error("😒Error creating table: ", err))
 
 

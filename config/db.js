@@ -1,8 +1,8 @@
 import pkg from 'pg'
-const {Pool} = pkg;
-import  'dotenv/config'
+const { Pool } = pkg;
+import 'dotenv/config'
 
-const pool = new Pool ({
+const pool = new Pool({
     user: process.env.DB_USER || "postgres",
     host: process.env.DB_HOST || "localhost",
     database: process.env.DB_NAME || "mfa",
